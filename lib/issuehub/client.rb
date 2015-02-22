@@ -37,5 +37,22 @@ module Issuehub
     def unmergeable
       detailed_pulls.select {|pull| !pull.mergeable }
     end
+
+    def label(target, options)
+      as = options.fetch(:as, 'bug')
+
+      issues = case target
+               when Symbol
+                 if self.respond_to?(target)
+                   self.send(target)
+                 else
+                   []
+                 end
+               end
+
+      issues.each do |issue|
+        @github_client.add_labels_to_an_issue(repository, issue.number, [as])
+      end
+    end
   end
 end
