@@ -1,9 +1,5 @@
 # Issuehub
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/issuehub`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -20,9 +16,18 @@ Or install it yourself as:
 
     $ gem install issuehub
 
+## Environment
+
+```
+ISSUEHUB_REPOSITORY=owner/repository  # meganemura/issuehub
+```
+
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+client = Issuehub::Client.new
+client.label(:unmergeable, :as => 'conflict')
+```
 
 ## Development
 
@@ -32,7 +37,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/issuehub/fork )
+1. Fork it ( https://github.com/meganemura/issuehub/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
