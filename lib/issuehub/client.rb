@@ -23,5 +23,11 @@ module Issuehub
     def pulls
       @pulls = github_client.pulls(repository)
     end
+
+    def detailed_pulls
+      pulls.map do |pull_request|
+        @github_client.pull_request(repository, pull_request.number)
+      end
+    end
   end
 end
