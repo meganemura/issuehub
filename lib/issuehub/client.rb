@@ -29,5 +29,13 @@ module Issuehub
         @github_client.pull_request(repository, pull_request.number)
       end
     end
+
+    def mergeable
+      detailed_pulls.select {|pull| pull.mergeable }
+    end
+
+    def unmergeable
+      detailed_pulls.select {|pull| !pull.mergeable }
+    end
   end
 end
