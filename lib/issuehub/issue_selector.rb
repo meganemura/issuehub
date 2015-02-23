@@ -6,19 +6,29 @@ module Issuehub
       @repository = repository
     end
 
+    attr_reader :targets
+
+    def issues
+      return @targets if @issue
+      @issue, @pull = true, false
+      @targets = @github_client.issues(@repository)
+    end
+
     def pulls
-      @pulls ||= @github_client.pulls(@repository)
+      return @targets if @pull
+      @issue, @pull = false, true
+      @targets = @github_client.pulls(@repository)
     end
 
     def detailed_pulls
-      return @pulls if @detailed
+      return @targets if @detailed
 
-      @pulls = pulls.map do |pull_request|
+      @targets = pulls.map do |pull_request|
         @github_client.pull_request(@repository, pull_request.number)
       end
       @detailed = true
 
-      @pulls
+      @targets
     end
 
     def mergeable
@@ -30,7 +40,7 @@ module Issuehub
     end
 
     def numbers
-      pulls.map(&:number)
+      targets.map(&:number)
     end
 
   end
