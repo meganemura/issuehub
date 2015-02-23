@@ -39,6 +39,10 @@ module Issuehub
       end
     end
 
+    def list
+      selector.numbers
+    end
+
     def label(options)
       as = options.fetch(:as, 'bug')
 
