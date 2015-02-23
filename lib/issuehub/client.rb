@@ -1,8 +1,11 @@
+require "issuehub/issue_selector"
+
 module Issuehub
   class Client
     def initialize
       dotenv
       setup_github_client
+      setup_issue_selector
     end
 
     def dotenv
@@ -15,32 +18,13 @@ module Issuehub
     end
     attr_reader :github_client
 
+    def setup_issue_selector
+      @selector = IssueSelector.new(github_client, repository)
+    end
+
     # owner/repo
     def repository
       ENV['ISSUEHUB_REPOSITORY']
-    end
-
-    def pulls
-      @pulls ||= github_client.pulls(repository)
-    end
-
-    def detailed_pulls
-      return @pulls if @detailed
-
-      @pulls = pulls.map do |pull_request|
-        @github_client.pull_request(repository, pull_request.number)
-      end
-      @detailed = true
-
-      @pulls
-    end
-
-    def mergeable
-      detailed_pulls.select {|pull| pull.mergeable }
-    end
-
-    def unmergeable
-      detailed_pulls.select {|pull| !pull.mergeable }
     end
 
     def label(target, options)
@@ -48,8 +32,8 @@ module Issuehub
 
       issues = case target
                when Symbol
-                 if self.respond_to?(target)
-                   self.send(target)
+                 if @selector.respond_to?(target)
+                   @selector.send(target)
                  else
                    []
                  end
