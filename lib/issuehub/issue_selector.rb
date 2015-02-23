@@ -29,5 +29,9 @@ module Issuehub
       detailed_pulls.select {|pull| !pull.mergeable }
     end
 
+    def numbers
+      pulls.map(&:number)
+    end
+
   end
 end
