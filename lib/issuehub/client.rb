@@ -37,6 +37,8 @@ module Issuehub
           []
         end
       end
+
+      self
     end
 
     def list
