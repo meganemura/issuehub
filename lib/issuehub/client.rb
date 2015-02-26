@@ -46,11 +46,9 @@ module Issuehub
       selector.numbers
     end
 
-    def label(options)
-      as = options.fetch(:as, 'bug')
-
+    def label_as(name)
       selector.numbers.each do |number|
-        client.add_labels_to_an_issue(repository, number, [as])
+        client.add_labels_to_an_issue(repository, number, [name])
       end
     end
   end
