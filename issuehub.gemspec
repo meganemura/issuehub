@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["meganemura"]
   spec.email         = ["meganemura@users.noreply.github.com"]
 
-  spec.summary       = "Manage filtered GitHub Issues/Pull Requests"
+  spec.summary       = "GitHub Issues/Pull Requests filterer"
   spec.description   = spec.summary
   spec.homepage      = "https://github.com/meganemura/issuehub"
   spec.license       = "MIT"
