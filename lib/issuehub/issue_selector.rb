@@ -8,6 +8,12 @@ module Issuehub
 
     attr_reader :targets
 
+    def reset!
+      @issue   = false
+      @pull    = false
+      @targets = nil
+    end
+
     def issues
       return @targets if @issue
       @issue, @pull = true, false
