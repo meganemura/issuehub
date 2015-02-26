@@ -38,6 +38,10 @@ module Issuehub
       targets.select {|target| target.labels.detect {|x| x.name == name } }
     end
 
+    def milestone(title)
+      targets.select {|target| target.milestone && target.milestone.title == title }
+    end
+
     private
 
     def issues_selected?
