@@ -35,6 +35,10 @@ module Issuehub
     end
 
     def labeled_as(name)
+      if @targets.nil? || @targets.empty?
+        return issues  # fetch
+      end
+
       if issues_selected?
         @targets = targets.select {|target| target.labels.detect {|x| x.name == name } }
       else
