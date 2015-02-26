@@ -8,6 +8,10 @@ module Issuehub
 
     attr_reader :targets
 
+    def to_numbers
+      targets && targets.map(&:number) || []
+    end
+
     def reset!
       @targets = nil
     end
@@ -28,10 +32,6 @@ module Issuehub
 
     def unmergeable
       @targets = detailed_pulls.select {|pull| !pull.mergeable }
-    end
-
-    def numbers
-      @targets = targets.map(&:number)
     end
 
     def labeled_as(name)

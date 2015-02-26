@@ -43,11 +43,11 @@ module Issuehub
     alias_method :filter, :select
 
     def list
-      selector.numbers
+      selector.to_numbers
     end
 
     def label_as(name)
-      selector.numbers.each do |number|
+      list.each do |number|
         client.add_labels_to_an_issue(repository, number, [name])
       end
     end
