@@ -40,6 +40,7 @@ module Issuehub
 
       self
     end
+    alias_method :filter, :select
 
     def list
       selector.numbers
