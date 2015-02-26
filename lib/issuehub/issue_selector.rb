@@ -65,7 +65,12 @@ module Issuehub
     end
 
     def detailed_pulls
-      return @targets if detailed_pulls?
+      if @targets.nil? || @targets.empty?
+        pulls   # fetch
+      elsif detailed_pulls?
+        return @targets
+      end
+
       @targets = pulls.map do |pull|
         @client.pull_request(@repository, pull.number)
       end
