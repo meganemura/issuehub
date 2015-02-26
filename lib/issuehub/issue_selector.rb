@@ -49,5 +49,16 @@ module Issuehub
       targets.map(&:number)
     end
 
+    private
+
+    def issues_selected?
+      return false if @targets.nil? || @targets.empty?
+      !! (@targets.first.url =~ %r(/issues/\d$))
+    end
+
+    def pulls_selected?
+      return false if @targets.nil? || @targets.empty?
+      !! (@targets.first.url =~ %r(/pulls/\d$))
+    end
   end
 end
