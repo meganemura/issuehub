@@ -42,6 +42,10 @@ module Issuehub
       @targets = targets.select {|target| target.milestone && target.milestone.title == title }
     end
 
+    def no_milestone
+      @targets = targets.select {|target| target.milestone.nil? }
+    end
+
     private
 
     def issues_selected?
