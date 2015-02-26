@@ -22,13 +22,6 @@ module Issuehub
       @targets = @client.pulls(@repository)
     end
 
-    def detailed_pulls
-      return @targets if detailed_pulls?
-      @targets = pulls.map do |pull_request|
-        @client.pull_request(@repository, pull_request.number)
-      end
-    end
-
     def mergeable
       detailed_pulls.select {|pull| pull.mergeable }
     end
@@ -51,6 +44,13 @@ module Issuehub
     def pulls_selected?
       return false if @targets.nil? || @targets.empty?
       !! (@targets.first.url =~ %r(/pulls/\d$))
+    end
+
+    def detailed_pulls
+      return @targets if detailed_pulls?
+      @targets = pulls.map do |pull_request|
+        @client.pull_request(@repository, pull_request.number)
+      end
     end
 
     def detailed_pulls?
