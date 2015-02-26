@@ -35,7 +35,13 @@ module Issuehub
     end
 
     def labeled_as(name)
-      @targets = targets.select {|target| target.labels.detect {|x| x.name == name } }
+      if issues_selected?
+        @targets = targets.select {|target| target.labels.detect {|x| x.name == name } }
+      else
+        @targets = targets.map do |pull|
+          @client.issue(@repository, pull.number)
+        end
+      end
     end
 
     def milestone(title)
