@@ -66,8 +66,8 @@ module Issuehub
 
     def detailed_pulls
       return @targets if detailed_pulls?
-      @targets = pulls.map do |pull_request|
-        @client.pull_request(@repository, pull_request.number)
+      @targets = pulls.map do |pull|
+        @client.pull_request(@repository, pull.number)
       end
     end
 
