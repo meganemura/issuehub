@@ -28,11 +28,11 @@ module Issuehub
       ENV['ISSUEHUB_REPOSITORY']
     end
 
-    def select(target)
+    def select(target, *args)
       case target
       when Symbol
         if selector.respond_to?(target)
-          selector.send(target)
+          selector.send(target, *args)
         else
           []
         end

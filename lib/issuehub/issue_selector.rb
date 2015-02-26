@@ -34,6 +34,10 @@ module Issuehub
       targets.map(&:number)
     end
 
+    def labeled_as(name)
+      targets.select {|target| target.labels.detect {|x| x.name == name } }
+    end
+
     private
 
     def issues_selected?
