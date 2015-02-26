@@ -1,8 +1,8 @@
 module Issuehub
   class IssueSelector
 
-    def initialize(github_client, repository)
-      @github_client = github_client
+    def initialize(client, repository)
+      @client = client
       @repository = repository
     end
 
@@ -17,20 +17,20 @@ module Issuehub
     def issues
       return @targets if @issue
       @issue, @pull = true, false
-      @targets = @github_client.issues(@repository)
+      @targets = @client.issues(@repository)
     end
 
     def pulls
       return @targets if @pull
       @issue, @pull = false, true
-      @targets = @github_client.pulls(@repository)
+      @targets = @client.pulls(@repository)
     end
 
     def detailed_pulls
       return @targets if @detailed
 
       @targets = pulls.map do |pull_request|
-        @github_client.pull_request(@repository, pull_request.number)
+        @client.pull_request(@repository, pull_request.number)
       end
       @detailed = true
 

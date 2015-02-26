@@ -14,12 +14,12 @@ module Issuehub
 
     def setup_github_client
       Octokit.reset!  # reload environment variables for dotenv
-      @github_client = Octokit.client
+      @client = Octokit.client
     end
-    attr_reader :github_client
+    attr_reader :client
 
     def setup_issue_selector
-      @selector = IssueSelector.new(github_client, repository)
+      @selector = IssueSelector.new(client, repository)
     end
     attr_reader :selector
 
@@ -49,7 +49,7 @@ module Issuehub
       as = options.fetch(:as, 'bug')
 
       selector.numbers.each do |number|
-        @github_client.add_labels_to_an_issue(repository, number, [as])
+        client.add_labels_to_an_issue(repository, number, [as])
       end
     end
   end
