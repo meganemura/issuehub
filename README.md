@@ -1,16 +1,24 @@
 # Issuehub
 
-## Environment
-
-```
-ISSUEHUB_REPOSITORY=owner/repository  # meganemura/issuehub
-```
-
 ## Usage
 
 ```ruby
 client = Issuehub::Client.new
-client.label(:unmergeable, :as => 'conflict')
+client.filter(:mergeable).list
+=> [1]
+client.filter(:labeled_as, 'help wanted').list
+=> []
+client.filter(:mergeable).label_as('help wanted')
+=> [1]
+client.filter(:labeled_as, 'help wanted').list
+=> [1]
+```
+
+## Environment
+
+```
+OCTOKIT_ACCESS_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+ISSUEHUB_REPOSITORY=owner/repository  # meganemura/issuehub
 ```
 
 ## Installation
