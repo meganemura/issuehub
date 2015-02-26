@@ -23,23 +23,23 @@ module Issuehub
     end
 
     def mergeable
-      detailed_pulls.select {|pull| pull.mergeable }
+      @targets = detailed_pulls.select {|pull| pull.mergeable }
     end
 
     def unmergeable
-      detailed_pulls.select {|pull| !pull.mergeable }
+      @targets = detailed_pulls.select {|pull| !pull.mergeable }
     end
 
     def numbers
-      targets.map(&:number)
+      @targets = targets.map(&:number)
     end
 
     def labeled_as(name)
-      targets.select {|target| target.labels.detect {|x| x.name == name } }
+      @targets = targets.select {|target| target.labels.detect {|x| x.name == name } }
     end
 
     def milestone(title)
-      targets.select {|target| target.milestone && target.milestone.title == title }
+      @targets = targets.select {|target| target.milestone && target.milestone.title == title }
     end
 
     private
