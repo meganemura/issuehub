@@ -9,20 +9,16 @@ module Issuehub
     attr_reader :targets
 
     def reset!
-      @issue   = false
-      @pull    = false
       @targets = nil
     end
 
     def issues
-      return @targets if @issue
-      @issue, @pull = true, false
+      return @targets if issues_selected?
       @targets = @client.issues(@repository)
     end
 
     def pulls
-      return @targets if @pull
-      @issue, @pull = false, true
+      return @targets if pulls_selected?
       @targets = @client.pulls(@repository)
     end
 
