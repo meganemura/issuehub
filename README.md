@@ -1,5 +1,18 @@
 # Issuehub
 
+## Environment
+
+```
+ISSUEHUB_REPOSITORY=owner/repository  # meganemura/issuehub
+```
+
+## Usage
+
+```ruby
+client = Issuehub::Client.new
+client.label(:unmergeable, :as => 'conflict')
+```
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -15,19 +28,6 @@ And then execute:
 Or install it yourself as:
 
     $ gem install issuehub
-
-## Environment
-
-```
-ISSUEHUB_REPOSITORY=owner/repository  # meganemura/issuehub
-```
-
-## Usage
-
-```ruby
-client = Issuehub::Client.new
-client.label(:unmergeable, :as => 'conflict')
-```
 
 ## Development
 
